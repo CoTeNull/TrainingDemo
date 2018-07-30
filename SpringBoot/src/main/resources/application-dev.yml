@@ -1,0 +1,19 @@
+server:
+  port: 8080   #端口配置
+  servlet:
+    context-path: /demo   #项目路由前缀(context-path)
+#自定义的属性(域变量)
+people:
+  IQ: E
+  EQ: 0
+#在配置文件中调用配置属性
+content: "IQ:${IQ}"
+spring:
+#  thymeleaf:
+#    cache: false
+  freemarker:
+    cache: false  #关闭缓存即使刷新
+  devtools:
+    restart:
+#      enabled: true  #热部署生效
+      additional-paths: src/main/java  #配置

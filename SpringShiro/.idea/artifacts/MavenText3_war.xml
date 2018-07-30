@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="MavenText3:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="cote.war">
+      <element id="artifact" artifact-name="MavenText3:war exploded" />
+    </root>
+  </artifact>
+</component>

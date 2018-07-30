@@ -1,0 +1,10 @@
+server:
+  port: 8080   #端口配置
+  servlet:
+    context-path: /demo   #项目路由前缀(context-path)
+#自定义的属性(域变量)
+people:
+  IQ: C
+  EQ: 70
+#在配置文件中调用配置属性
+content: "IQ:${IQ}"
