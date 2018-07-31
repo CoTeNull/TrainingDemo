@@ -235,6 +235,7 @@
           <artifactId>shiro-web</artifactId>
           <version>1.4.0</version>
       </dependency>
+      <!--测试依赖-->
       <dependency>
           <groupId>junit</groupId>
           <artifactId>junit</artifactId>

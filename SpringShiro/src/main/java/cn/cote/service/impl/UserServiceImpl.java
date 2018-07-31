@@ -19,12 +19,14 @@ public class UserServiceImpl implements UserService {
     private TUserMapper tUserMapper;
 
     @Override
-    public TUser findUserByName(String userName) {
+    public String findPassWordByName(String userName) {
         TUserExample example = new TUserExample();
         TUserExample.Criteria criteria = example.createCriteria();
         criteria.andUserNameEqualTo(userName);
         List<TUser> list =tUserMapper.selectByExample(example);
-        return list.get(0);
+        String password = list.get(0).getUserPassword();
+        if(password != null){ return password; }
+        else{return null;}
     }
 
     @Autowired

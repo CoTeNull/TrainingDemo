@@ -6,7 +6,7 @@ import java.util.Set;
 
 public interface UserService {
 
-    TUser findUserByName(String userName);
+    String findPassWordByName(String userName);
 
     Set<String> findRolesByUserName(String userName);
 

@@ -53,11 +53,8 @@ public class CustomRealm extends AuthorizingRealm {
     @Autowired
     private UserService userService;
     private String getPasswordByUserName(String userName) {
-        TUser user = userService.findUserByName(userName);
-        String password = user.getUserPassword();
-        if(password != null){
-            return password;
-        }else{return null;}
+        String password = userService.findPassWordByName(userName);
+        return password;
     }
    //权限
     private Set<String> getPermissionsByUserName(String userName) {

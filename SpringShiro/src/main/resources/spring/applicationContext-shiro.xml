@@ -34,13 +34,13 @@
     <bean id="realm" class="cn.cote.shiro.realm.CustomRealm">
         <property name="credentialsMatcher" ref="credentialsMatcher"/>
     </bean>
-    <!--md5-->
+    <!--md5配置-->
     <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher" id="credentialsMatcher">
         <property name="hashAlgorithmName" value="md5" />
         <property name="hashIterations" value="1"/>
     </bean>
 
-    <!--test-->
+    <!--shiro注解配置-->
     <bean class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
     <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
         <property name="securityManager" ref="securityManager"/>

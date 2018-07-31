@@ -2,7 +2,7 @@
 <project version="4">
   <component name="dataSourceStorageLocal">
     <data-source name="table_mv@localhost" uuid="424ec505-2377-410e-b045-b56a3708f329">
-      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" family="MYSQL" exact-version="0.0" />
       <secret-storage>master_key</secret-storage>
       <first-sync>true</first-sync>
       <user-name>root</user-name>

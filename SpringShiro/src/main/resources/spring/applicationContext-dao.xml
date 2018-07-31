@@ -44,6 +44,7 @@
 		<!-- 定义mapper -->
 		<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 			<!-- 配置扫描包的路径如果要扫描多个包，中间使用半角逗号分隔 -->
+			<!--配置mapper接口位置-->
 			<property name="basePackage" value="cn.cote.dao"></property>
 			
 			<!-- 使用SqlSessionFactoryBeanName -->
