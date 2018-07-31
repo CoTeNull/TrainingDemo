@@ -5,6 +5,7 @@ import cn.cote.pojo.User;
 import cn.cote.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,6 +29,7 @@ public class UserController {
      * @param session
      * @return 前端数据数组
      */
+    @CrossOrigin
     @RequestMapping(value = "login",method = RequestMethod.POST)
     public WebData login(HttpServletRequest request,HttpSession session){
      //获取用户数据，放入User模型中
@@ -56,6 +58,7 @@ public class UserController {
      * @param request
      * @return 前端数据数组
      */
+    @CrossOrigin
     @RequestMapping(value = "register",method = RequestMethod.POST)
     public WebData register(HttpServletRequest request,HttpSession session){
         User this_user =new User();
@@ -89,6 +92,7 @@ public class UserController {
      * @param session
      * @return 前端数据数组
      */
+    @CrossOrigin
     @RequestMapping(value = "registerNc",method = RequestMethod.POST)
     public WebData registerNc(HttpServletRequest request,HttpSession session){
     String this_userNc =request.getParameter("userNc");
@@ -106,6 +110,7 @@ public class UserController {
      * @return
      * @throws IOException
      */
+    @CrossOrigin
     @RequestMapping(value = "registerImg",method = RequestMethod.POST)
     public WebData registerImg(MultipartFile file,HttpSession session,HttpServletRequest request) throws IOException {
         WebData data = new WebData();

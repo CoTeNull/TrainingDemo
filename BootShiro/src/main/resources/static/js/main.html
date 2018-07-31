@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery-3.2.1.js"></script>
+    <script src="jquery.cookie.js"></script>
+</head>
+<body>
+ni success le
+<button id="submit">begin</button>
+<script>
+    $(function () {
+        $("#submit").click(function () {
+            console.log($.cookie('token'));
+            $.ajax({
+                type: "POST",
+                timeout: 10000, // 超时时间 10 秒
+                headers: {
+                    'token':$.cookie('token')
+                },
+                url: "/test",
+                success: function(data) {
+                    alert(data)
+                },
+                error: function(err) {
+                },
+                complete: function(XMLHttpRequest, status) { //请求完成后最终执行参数　
+                }
+            });
+        })
+
+    })
+</script>
+</body>
+</html>

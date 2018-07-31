@@ -3,20 +3,25 @@ package cn.cote.config;
 import cn.cote.shiro.realm.CustomRealm;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.MemoryConstrainedCacheManager;
-import org.apache.shiro.session.mgt.eis.MemorySessionDAO;
-import org.apache.shiro.session.mgt.eis.SessionDAO;
+import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.apache.shiro.web.servlet.SimpleCookie;
+import org.apache.shiro.web.servlet.ShiroHttpServletRequest;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
+import org.apache.shiro.web.util.WebUtils;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.util.StringUtils;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import java.io.Serializable;
 import java.util.LinkedHashMap;
 
 /**
@@ -59,7 +64,10 @@ public class ShiroConfiguration {
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         filterChainDefinitionMap.put("/**/hello","anon");
         filterChainDefinitionMap.put("/**/login","anon");
+//        filterChainDefinitionMap.put("/**/test","anon");
         filterChainDefinitionMap.put("/**/toLogin","anon");
+        filterChainDefinitionMap.put("/**/main.html","anon");
+        filterChainDefinitionMap.put("/**/js/*","anon");
         filterChainDefinitionMap.put("/**/login/login.html","anon");
         filterChainDefinitionMap.put("/out","logout");
         //需要登录访问的资源 , 一般将/**放在最下边
@@ -144,12 +152,40 @@ public class ShiroConfiguration {
 
 
         //shiro缓存管理器
-        manager.setCacheManager(shiroCacheManager);
+//        manager.setCacheManager(shiroCacheManager);
         //shiro session管理器
-//        manager.setSessionManager(sessionManager);
+        manager.setSessionManager(sessionManager());
 
         return manager;
     }
+
+    @Bean
+    public SessionManager sessionManager() {
+        MySessionManager mySessionManager = new MySessionManager();
+        return mySessionManager;
+    }
+
+//重写DefaultWebSessionManager获取sessionId的方法
+    public class MySessionManager extends DefaultWebSessionManager {
+    @Override
+    protected Serializable getSessionId(ServletRequest request, ServletResponse response) {
+        HttpServletRequest httpServletRequest = WebUtils.toHttp(request);
+//        String token = httpServletRequest.getHeader("token");
+        String token = httpServletRequest.getParameter("token");
+        System.out.println("token："+token);
+        if(!StringUtils.isEmpty(token)){
+            request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_SOURCE, "token");
+            request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID, token);
+            request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_IS_VALID, Boolean.TRUE);
+            return token;
+
+        }else{
+            return super.getSessionId(request, response);
+        }
+
+    }
+}
+
 
     /*=======================================================================================================*/
     //sissionDao

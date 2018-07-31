@@ -35,24 +35,23 @@
         <p>user:</p><input type="text" name="userName" id="userName"><br>
         <p>pass:</p><input type="text" name="passWord" id="passWord"><br><br>
         <button id="submit">登陆</button><br>
+		<a href="file:///C:/Users/xqtdn/Desktop/js/main.html">123</a>
         <script>
             $(function () {
                 $("#submit").click(function () {
                     var data={"userName":$("#userName").val(),"passWord":$("#passWord").val()};
                     console.log(data);
-
-                   $.post("/login",data,function (data) {
+                   $.post("http://127.0.0.1:8080/login",data,function (data) {
                        console.log("服务器传回的data:");
                        console.log(data);
                        if(data.code == 1){
                            $.cookie("token",data.data);
-                           window.location.href="js/main.html"
+                           window.location.href="js/main1.html"
                        }else{
                            console.log("error");
                        }
                    })
                 });
-                $("article").bind("selectstart",function(){return false;});
             })
         </script>
     </article>

@@ -79,7 +79,11 @@
             <artifactId>shiro-web</artifactId>
             <version>1.4.0</version>
         </dependency>
-
+		<!--允许访问静态资源-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
